@@ -33,13 +33,13 @@ public interface IMutationOperator {
      * @param methodVisitor
      * @return
      */
-    public MethodVisitor apply(final MethodMutationContext context, final MethodInfo methodInfo, final MethodVisitor methodVisitor);
+    MethodVisitor apply(final MethodMutationContext context, final MethodInfo methodInfo, final MethodVisitor methodVisitor);
    
     /**
      * Get the operator name
      * @return 
      */
-    public String getName();
+    String getName();
     
     /**
      * Check if the mutation operator is applicable

@@ -42,7 +42,7 @@ public class JUnitResult {
     /**
      *
      */
-    private ArrayList<JUnitFailure> junitFailures = new ArrayList<JUnitFailure>();
+    private final ArrayList<JUnitFailure> junitFailures = new ArrayList<>();
     /**
      *
      */
@@ -133,10 +133,7 @@ public class JUnitResult {
         if (this.runCount != other.runCount) {
             return false;
         }
-        if (this.successful != other.successful) {
-            return false;
-        }
-        return true;
+        return this.successful == other.successful;
     }
 
     /**

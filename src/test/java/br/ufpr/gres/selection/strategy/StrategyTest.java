@@ -18,10 +18,13 @@ package br.ufpr.gres.selection.strategy;
 import br.ufpr.gres.core.MutationDetails;
 import br.ufpr.gres.core.Mutator;
 import br.ufpr.gres.core.classpath.ClassDetails;
-import br.ufpr.gres.core.classpath.Resources;
+import br.ufpr.gres.core.classpath.DynamicClassDetails;
 import br.ufpr.gres.core.operators.IMutationOperator;
 import br.ufpr.gres.core.operators.method_level.AOR;
 import br.ufpr.gres.core.operators.method_level.ROR;
+import example.Bub;
+import example.Cal;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -40,10 +43,10 @@ public class StrategyTest {
         MUTATORS.add(AOR.AOR);
         MUTATORS.add(ROR.ROR);
 
-        String directory = Paths.get(System.getProperty("user.dir")) + File.separator + "examples" + File.separator + "bub";
-        ClassDetails classes = new Resources(directory).getClasses().get(0);
+//        String directory = Paths.get(System.getProperty("user.dir")) + File.separator + "examples" + File.separator + "bub";
+//        ClassDetails classes = new Resources(directory).getClasses().get(0);
 
-        final byte[] classToMutate = classes.getBytes();
+        final byte[] classToMutate = DynamicClassDetails.get(Bub.class).getBytes(); //classes.getBytes();
 
         return Mutator.doMutation(MUTATORS, classToMutate);
     }

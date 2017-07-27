@@ -49,15 +49,12 @@ public class ArchiveClassPathRoot implements ClassPathRoot {
 
     @Override
     public InputStream getData(final String name) throws IOException {
-        final ZipFile zip = getRoot();
-        try {
+        try (ZipFile zip = getRoot()) {
             final ZipEntry entry = zip.getEntry(name.replace('.', '/') + ".class");
             if (entry == null) {
                 return null;
             }
             return StreamUtils.copyStream(zip.getInputStream(entry));
-        } finally {
-            zip.close(); // closes input stream
         }
     }
 
@@ -92,7 +89,7 @@ public class ArchiveClassPathRoot implements ClassPathRoot {
 
     @Override
     public Collection<String> classNames() {
-        final List<String> names = new ArrayList<String>();
+        final List<String> names = new ArrayList<>();
         final ZipFile root = getRoot();
         try {
             final Enumeration<? extends ZipEntry> entries = root.entries();

@@ -18,8 +18,6 @@ package br.ufpr.gres.testcase.classloader;
 import br.ufpr.gres.util.IsolationUtils;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.slf4j.Logger;
@@ -63,7 +61,7 @@ public abstract class InstrumentingClassLoader extends ClassLoader {
     }
 
     protected String getName(String fileName) {
-        return new String(fileName.replace('.', File.separatorChar)).concat(".class");
+        return fileName.replace('.', File.separatorChar).concat(".class");
     }
 
     /**
@@ -119,10 +117,8 @@ public abstract class InstrumentingClassLoader extends ClassLoader {
                 byteBuffer = Files.readAllBytes(Paths.get(directory, getName(name)));
             }
 
-            Class<?> result = defineClassForName(fileName, byteBuffer);
-
             //logger.info("Loaded class '" + fileName + "' from path '" + directory + "'");
-            return result;
+            return defineClassForName(fileName, byteBuffer);
         } catch (IOException e) {
             //logger.error("Error while loading class " + fileName);
             throw new ClassNotFoundException();

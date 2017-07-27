@@ -28,7 +28,7 @@ import java.net.URLClassLoader;
 public class ForeingClassLoader {
 
     // Create a File object on the root of the directory containing the class file
-    private File rootPath;
+    private final File rootPath;
 
     public ForeingClassLoader(File file) {
         rootPath = file;

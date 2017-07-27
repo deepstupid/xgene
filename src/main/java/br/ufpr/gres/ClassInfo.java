@@ -5,11 +5,17 @@
  */
 package br.ufpr.gres;
 
+import br.ufpr.gres.core.classpath.ClassDetails;
+import br.ufpr.gres.core.visitors.methods.RegisterInformationsClassVisitor;
+import br.ufpr.gres.core.visitors.methods.empty.NullVisitor;
+import org.apache.commons.io.FileUtils;
+import org.objectweb.asm.ClassReader;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *
  * @author Jackson Antonio do Prado Lima <jacksonpradolima at gmail.com>
  * @version 1.0
  */
@@ -21,6 +27,7 @@ public class ClassInfo {
     private final String signature;
     private final String superName;
     private final String[] interfaces;
+
 
     public ClassInfo(final int version, final int access, final String name, final String signature, final String superName, final String[] interfaces) {
         this.version = version;
@@ -64,4 +71,6 @@ public class ClassInfo {
     public String[] getInterfaces() {
         return this.interfaces;
     }
+
+
 }

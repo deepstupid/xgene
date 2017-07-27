@@ -26,23 +26,23 @@ import java.util.List;
  * @version 1.0
  */
 public interface ISelectionStrategy {    
-    public boolean contains(MutationIdentifier id);
+    boolean contains(MutationIdentifier id);
         
-    public void remove(MutationIdentifier id);
+    void remove(MutationIdentifier id);
     
-    public void reset();
+    void reset();
     
-    public void update(MutationDetails t);
-    public void updateIgnoreItem(MutationDetails t);
-    public void updateListStrategy(MutationDetails t);
-    public void updateListStrategy(List<MutationDetails> t);
+    void update(MutationDetails t);
+    void updateIgnoreItem(MutationDetails t);
+    void updateListStrategy(MutationDetails t);
+    void updateListStrategy(List<MutationDetails> t);
     
-    public void setMaxSelection(int num);
-    public void setMinSelection(int num);
+    void setMaxSelection(int num);
+    void setMinSelection(int num);
     
-    public List<MutationDetails> get();           
-    public MutationDetails get(MutationIdentifier id);
-    public List<MutationDetails> getItemsIgnored();      
+    List<MutationDetails> get();
+    MutationDetails get(MutationIdentifier id);
+    List<MutationDetails> getItemsIgnored();
     
-    public boolean allItemsSelected();
+    boolean allItemsSelected();
 }

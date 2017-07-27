@@ -130,4 +130,4 @@ public class NullMethodVisitor extends MethodVisitor {
     @Override
     public void visitVarInsn(final int arg0, final int arg1) {
     }
-};
+}

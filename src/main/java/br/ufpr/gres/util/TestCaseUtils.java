@@ -57,7 +57,7 @@ public class TestCaseUtils {
             List<FrameworkMethod> methods = new ArrayList<>();
             methods.addAll(tc.getAnnotatedMethods(Test.class));
             for (FrameworkMethod method : methods) {
-                List<Throwable> errors = new ArrayList<Throwable>();
+                List<Throwable> errors = new ArrayList<>();
                 method.validatePublicVoidNoArg(false, errors);
                 if (errors.isEmpty()) {
                     return true;

@@ -45,11 +45,9 @@ public class First2LastStrategy extends AbstractStrategy {
             MutationDetails mutationDetails = null;
 
             if (itemsAvailable.isEmpty()) {
-                itemsAvailable = new ArrayList(this.originalList);                
-                
-                for (MutationDetails r : result) {
-                    itemsAvailable.remove(r);
-                }
+                itemsAvailable = new ArrayList(this.originalList);
+
+                itemsAvailable.removeAll(result);
             }
 
             if ((i % 2) == 0) {
@@ -66,7 +64,7 @@ public class First2LastStrategy extends AbstractStrategy {
         }
 
         updateListStrategy(result);
-        Collections.sort(result, getComparator());
+        result.sort(getComparator());
 
         return result;
     }

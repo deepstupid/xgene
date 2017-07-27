@@ -24,7 +24,7 @@ import org.objectweb.asm.MethodVisitor;
  */
 public interface IInsnSubstitution {
 
-    public void apply(final MethodVisitor mv);
+    void apply(final MethodVisitor mv);
 
-    public String decribe();
+    String decribe();
 }

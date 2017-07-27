@@ -68,7 +68,7 @@ public class DirectoryClassPathRoot implements ClassPathRoot {
     }
 
     private Collection<String> classNames(final File file) {
-        final List<String> classNames = new LinkedList<String>();
+        final List<String> classNames = new LinkedList<>();
         for (final File f : file.listFiles()) {
             if (f.isDirectory()) {
                 classNames.addAll(classNames(f));

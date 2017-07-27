@@ -57,23 +57,38 @@ public final class Mutant {
     public byte[] getBytes() {
         return this.bytes;
     }
-    
+
     /**
      * Return the mutant order (number of mutations present in the mutant)
+     *
      * @return Mutant order
      */
-    public int getOrder(){
+    public int getOrder() {
         return this.details.size();
     }
-    
+
     @Override
     public String toString() {
-        String description = "";
+        StringBuilder description = new StringBuilder();
 
         for (int i = 0; i < details.size(); i++) {
-            description += i + 1 + ") " + details.get(i).toString() + "\n";
+            description.append(i).append(1).append(") ").append(details.get(i).toString()).append("\n");
         }
 
-        return description;
+        return description.toString();
+    }
+
+    public Class compile(String name, DynamicClassLoader cl) {
+        //public Class<?> loadClassFromFile (String fileName, String directory) throws ClassNotFoundException {
+        try {
+
+            byte[] byteBuffer = getBytes();
+            return cl.load(name, byteBuffer);
+        } catch (Exception e) {
+            //logger.error("Error while loading class " + fileName);
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

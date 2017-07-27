@@ -37,7 +37,7 @@ public class AbstractStrategy implements ISelectionStrategy {
     /**
      * Pattern order comparator
      */
-    protected Comparator comparatorAlphanum;
+    protected final Comparator comparatorAlphanum;
 
     /**
      * Maximum selection
@@ -49,7 +49,7 @@ public class AbstractStrategy implements ISelectionStrategy {
      */
     protected int minSelection;
 
-    protected JMetalRandom randomGenerator;
+    protected final JMetalRandom randomGenerator;
 
     /**
      * The original list
@@ -59,7 +59,7 @@ public class AbstractStrategy implements ISelectionStrategy {
     /**
      * The items from which the strategy can choose from and remove
      */
-    protected ArrayList<MutationDetails> listStrategy;
+    protected final ArrayList<MutationDetails> listStrategy;
 
     /**
      * The items were selected by the strategy
@@ -83,8 +83,8 @@ public class AbstractStrategy implements ISelectionStrategy {
         this.ignoredItems = new HashMap<>();
         this.selectedItems = new HashMap<>();
 
-        Collections.sort(this.originalList, this.comparatorAlphanum);
-        Collections.sort(this.listStrategy, this.comparatorAlphanum);
+        this.originalList.sort(this.comparatorAlphanum);
+        this.listStrategy.sort(this.comparatorAlphanum);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class AbstractStrategy implements ISelectionStrategy {
 
     @Override
     public List<MutationDetails> getItemsIgnored() {
-        return this.ignoredItems.values().stream().collect(Collectors.toList());
+        return new ArrayList<>(this.ignoredItems.values());
     }
 
     /**
@@ -153,7 +153,7 @@ public class AbstractStrategy implements ISelectionStrategy {
         this.selectedItems = new HashMap<>();
 
         this.originalList = new ArrayList<>(this.originalList);
-        Collections.sort(this.originalList, this.comparatorAlphanum);
+        this.originalList.sort(this.comparatorAlphanum);
     }
 
     @Override

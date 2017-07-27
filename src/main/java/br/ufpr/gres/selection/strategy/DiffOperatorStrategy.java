@@ -46,9 +46,7 @@ public class DiffOperatorStrategy extends AbstractStrategy {
             if (!it.hasNext()) {
                 ArrayList<MutationDetails> itemsAvailable = new ArrayList(this.originalList);
 
-                for (MutationDetails r : result) {
-                    itemsAvailable.remove(r);
-                }
+                itemsAvailable.removeAll(result);
 
                 it = itemsAvailable.iterator();
             }
@@ -61,14 +59,14 @@ public class DiffOperatorStrategy extends AbstractStrategy {
                 continue;
             }
 
-            if (!result.stream().map(m -> m.getMutator()).filter(mutationDetails.getMutator()::equals).findAny().isPresent()) {
+            if (!result.stream().map(MutationDetails::getMutator).anyMatch(mutationDetails.getMutator()::equals)) {
                 updateListStrategy(mutationDetails);
                 result.add(mutationDetails);
                 break;
             }
         }
 
-        Collections.sort(result, getComparator());
+        result.sort(getComparator());
 
         return result;
     }

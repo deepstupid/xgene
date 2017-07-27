@@ -27,5 +27,5 @@ public final class XGeneUtils {
     /**
      * Version of ASM library used, currently set to {@value}.
      */
-    public static final int CURRENT_ASM_VERSION = Opcodes.ASM5;
+    public static final int CURRENT_ASM_VERSION = Opcodes.ASM6;
 }

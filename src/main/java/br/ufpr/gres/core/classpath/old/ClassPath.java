@@ -120,7 +120,7 @@ public class ClassPath {
     }
 
     public static Collection<String> getClassPathElementsAsPaths() {
-        return getClassPathElementsAsFiles().stream().map(m -> m.getPath()).collect(Collectors.toList());
+        return getClassPathElementsAsFiles().stream().map(File::getPath).collect(Collectors.toList());
     }
 
     public static Collection<File> getClassPathElementsAsFiles() {

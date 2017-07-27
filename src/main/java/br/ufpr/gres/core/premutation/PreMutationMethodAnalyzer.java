@@ -34,7 +34,7 @@ public class PreMutationMethodAnalyzer extends MethodVisitor {
     private final PremutationClassInfo classInfo;
 
     public PreMutationMethodAnalyzer(final PremutationClassInfo classInfo) {
-        super(Opcodes.ASM5, new TryWithResourcesMethodVisitor(classInfo));
+        super(Opcodes.ASM6, new TryWithResourcesMethodVisitor(classInfo));
         this.classInfo = classInfo;
         this.loggingClasses = new HashSet<>(LOGGING_CLASSES);
     }
@@ -42,7 +42,7 @@ public class PreMutationMethodAnalyzer extends MethodVisitor {
     @Override
     public void visitMethodInsn(final int opcode, final String owner, final String name, final String desc, boolean itf) {
 
-        if (this.loggingClasses.stream().anyMatch(p -> owner.startsWith(p))) {
+        if (this.loggingClasses.stream().anyMatch(owner::startsWith)) {
             this.classInfo.registerLineToAvoid(this.currentLineNumber);
         }
 

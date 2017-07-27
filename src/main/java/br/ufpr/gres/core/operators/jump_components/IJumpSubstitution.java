@@ -25,7 +25,7 @@ import org.objectweb.asm.MethodVisitor;
  */
 public interface IJumpSubstitution {
 
-    public void apply(final MethodVisitor mv, final Label label);
+    void apply(final MethodVisitor mv, final Label label);
 
-    public String decribe();
+    String decribe();
 }

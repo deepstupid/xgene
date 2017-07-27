@@ -60,12 +60,11 @@ public class StringUtils {
 
         for (int i = 0; i < s.length(); i++) {
             final char c = s.charAt(i);
-            final int v = c;
-            if ((v < 32) || (v > 127) || (v == 38) || (v == 39) || (v == 60)
-                    || (v == 62) || (v == 34)) {
+            if (((int) c < 32) || ((int) c > 127) || ((int) c == 38) || ((int) c == 39) || ((int) c == 60)
+                    || ((int) c == 62) || ((int) c == 34)) {
                 out.append('&');
                 out.append('#');
-                out.append(v);
+                out.append((int) c);
                 out.append(';');
             } else {
                 out.append(c);

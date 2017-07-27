@@ -153,14 +153,14 @@ public class TryWithResourcesMethodVisitor extends MethodVisitor {
 
     private final PremutationClassInfo context;
 
-    private final List<Integer> opcodesStack = new ArrayList<Integer>();
+    private final List<Integer> opcodesStack = new ArrayList<>();
     private int currentLineNumber;
 
     /**
      * @param context to store detected line numbers
      */
     public TryWithResourcesMethodVisitor(final PremutationClassInfo context) {
-        super(Opcodes.ASM5);
+        super(Opcodes.ASM6);
         this.context = context;
     }
 

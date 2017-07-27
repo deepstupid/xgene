@@ -28,7 +28,7 @@ public class JUnitFailure {
 
     private final String descriptionMethodName;
     private final String exceptionClassName;
-    private final ArrayList<String> exceptionStackTrace = new ArrayList<String>();
+    private final ArrayList<String> exceptionStackTrace = new ArrayList<>();
     private final boolean isAssertionError;
     private final String message;
     private final String trace;

@@ -25,7 +25,7 @@ import java.util.List;
  */
 public interface IMutationOperatorJump extends IMutationOperator {
 
-    public boolean shouldMutate(int opcode);
+    boolean shouldMutate(int opcode);
 
-    public List<IJumpSubstitution> getMutation(int opcode);
+    List<IJumpSubstitution> getMutation(int opcode);
 }

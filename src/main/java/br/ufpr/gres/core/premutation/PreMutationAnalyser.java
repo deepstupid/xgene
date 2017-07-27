@@ -22,7 +22,7 @@ public class PreMutationAnalyser extends ClassVisitor {
     private final PremutationClassInfo classInfo = new PremutationClassInfo();
 
     public PreMutationAnalyser() {
-        super(Opcodes.ASM5);
+        super(Opcodes.ASM6);
     }
 
     @Override

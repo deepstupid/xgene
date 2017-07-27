@@ -22,10 +22,9 @@ import br.ufpr.gres.core.MethodInfo;
 import br.ufpr.gres.core.MethodMutationContext;
 import br.ufpr.gres.core.operators.insn_components.IMutationOperatorInsn;
 import br.ufpr.gres.core.operators.insn_components.InsnVisitor;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -42,7 +41,7 @@ public enum AOR implements IMutationOperatorInsn {
 
     private final String description;
 
-    private AOR(String description) {
+    AOR(String description) {
         this.description = description;
     }
 
@@ -134,7 +133,7 @@ public enum AOR implements IMutationOperatorInsn {
     @Override
     public List<IInsnSubstitution> getMutation(int opcode) {
         if (MUTATIONS.containsKey(opcode)) {
-            return Arrays.asList(MUTATIONS.get(opcode));
+            return Collections.singletonList(MUTATIONS.get(opcode));
         }
         throw new IllegalArgumentException("can not mutate opcode " + opcode);
     }

@@ -15,49 +15,40 @@
  */
 package br.ufpr.gres.core.classpath;
 
+import br.ufpr.gres.ClassContext;
 import br.ufpr.gres.ClassInfo;
-import br.ufpr.gres.testcase.classloader.ForeingClassLoader;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Modifier;
-import org.apache.commons.io.FileUtils;
+import br.ufpr.gres.core.visitors.methods.RegisterInformationsClassVisitor;
+import br.ufpr.gres.core.visitors.methods.empty.NullVisitor;
+import org.objectweb.asm.ClassReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.lang.reflect.Modifier;
+
 /**
- *
  * @author Jackson Antonio do Prado Lima <jacksonpradolima at gmail.com>
  * @version 1.0
  */
-public class ClassDetails {
+abstract public class ClassDetails {
 
-    private ClassInfo classInfo;
+    private final Logger logger = LoggerFactory.getLogger(ClassDetails.class);
+
+    private final ClassInfo classInfo;
     private ClassName className;
-    private File file;
-    private boolean isJavaFile;
-    private Logger logger = LoggerFactory.getLogger(ClassDetails.class);
-    private File root;
+
     private Class clazz;
 
-    public ClassDetails(ClassInfo classInfo, File file, File root) throws IOException, ClassNotFoundException {
+    public ClassDetails(ClassInfo classInfo, Class clazz) throws ClassNotFoundException {
         this.classInfo = classInfo;
-        this.file = file;
-        this.root = root;
-        isJavaFile = file.getName().contains(".java");
 
-        setClassName();
-
-        ForeingClassLoader foreingClassLoader = new ForeingClassLoader(root);
-        clazz = foreingClassLoader.getLoader().loadClass(className.asJavaName());
-    }
-
-    public byte[] getBytes() throws IOException {
-        return FileUtils.readFileToByteArray(file);
-    }
-
-    private void setClassName() {
         this.className = new ClassName(this.classInfo.getName());
+
+        this.clazz = clazz;
     }
+
+    abstract public byte[] getBytes() throws IOException;
+
 
     /**
      * Class name without package
@@ -68,9 +59,6 @@ public class ClassDetails {
         return this.className;
     }
 
-    public File getFile() {
-        return this.file;
-    }
 
     /**
      * Examine if class <i>c</i> is an applet class
@@ -107,7 +95,7 @@ public class ClassDetails {
         return false;
     }
 
-    public Class getClassInstance() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public Class getClassInstance() throws InstantiationException, IllegalAccessException {
         // initialization of the test set class
         if (clazz.newInstance() == null) {
             throw new InstantiationException();
@@ -122,7 +110,7 @@ public class ClassDetails {
      * @throws java.lang.ClassNotFoundException
      * @throws java.io.IOException
      */
-    public boolean isTestable() throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException {
+    public boolean isTestable() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class c = getClassInstance();
 
         if (c.isInterface()) {

@@ -52,9 +52,7 @@ public class MutationTimeoutDecorator {
     private void executeFutureWithTimeOut(final FutureTask<?> future, final ResultCollector rc) {
         try {
             future.get(this.executionTime, TimeUnit.MILLISECONDS);
-        } catch (final TimeoutException ex) {
-            // swallow
-        } catch (final InterruptedException e) {
+        } catch (final TimeoutException | InterruptedException ex) {
             // swallow
         } catch (final ExecutionException e) {
             logger.error("Error in test case execution", e);
@@ -62,7 +60,7 @@ public class MutationTimeoutDecorator {
     }
     
     private FutureTask<?> createFutureForChildTestUnit(final ClassLoader loader, final ResultCollector rc) {
-        final FutureTask<?> future = new FutureTask<Object>(createRunnable(loader,
+        final FutureTask<?> future = new FutureTask<>(createRunnable(loader,
                 rc), null);
         final Thread thread = new Thread(future);
         thread.setDaemon(true);
@@ -72,17 +70,13 @@ public class MutationTimeoutDecorator {
     }
     
     private Runnable createRunnable(final ClassLoader loader, final ResultCollector rc) {
-        return new Runnable() {
-            
-            @Override
-            public void run() {
-                try {
-                    //child().execute(loader, rc);
-                } catch (final Throwable ex) {
-                    //rc.notifyEnd(child().getDescription(), ex);
-                }
-                
+        return () -> {
+            try {
+                //child().execute(loader, rc);
+            } catch (final Throwable ex) {
+                //rc.notifyEnd(child().getDescription(), ex);
             }
+
         };
     }
 }

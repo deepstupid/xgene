@@ -22,10 +22,9 @@ import br.ufpr.gres.core.operators.jump_components.IJumpSubstitution;
 import br.ufpr.gres.core.operators.jump_components.IMutationOperatorJump;
 import br.ufpr.gres.core.operators.jump_components.JumpSubstitution;
 import br.ufpr.gres.core.operators.jump_components.JumpVisitor;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -43,7 +42,7 @@ public enum ROR implements IMutationOperatorJump {
 
     private final String description;
 
-    private ROR(String description) {
+    ROR(String description) {
         this.description = description;
     }
 
@@ -127,7 +126,7 @@ public enum ROR implements IMutationOperatorJump {
     @Override
     public List<IJumpSubstitution> getMutation(int opcode) {
         if (MUTATIONS.containsKey(opcode)) {
-            return Arrays.asList(MUTATIONS.get(opcode));
+            return Collections.singletonList(MUTATIONS.get(opcode));
         }
         throw new IllegalArgumentException("can not mutate opcode " + opcode);
     }

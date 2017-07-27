@@ -32,7 +32,7 @@ public class ClassContext {
     private ClassInfo classInfo;
     private String sourceFile;
 
-    private List<MutationIdentifier> target = new ArrayList<>();
+    private final List<MutationIdentifier> target = new ArrayList<>();
     private final List<MutationDetails> mutations = new ArrayList<>();
 
     private final ConcreteBlockCounter blockCounter = new ConcreteBlockCounter();
@@ -74,7 +74,7 @@ public class ClassContext {
     }
 
     public boolean shouldMutate(final MutationIdentifier newId) {
-        return getTargetMutation().isEmpty() ? true : getTargetMutation().stream().anyMatch(p -> p.matches(newId));
+        return getTargetMutation().isEmpty() || getTargetMutation().stream().anyMatch(p -> p.matches(newId));
     }
 
     public List<MutationDetails> getCollectedMutations() {

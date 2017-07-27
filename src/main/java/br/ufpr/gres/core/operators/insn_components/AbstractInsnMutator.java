@@ -30,12 +30,11 @@ import org.objectweb.asm.MethodVisitor;
 public abstract class AbstractInsnMutator extends MutatingMethodAdapter {
 
     private final MethodMutationContext context;
-    private final MethodInfo methodInfo;
-    private final IMutationOperatorInsn mutationOperator;    
+    private final IMutationOperatorInsn mutationOperator;
 
     public AbstractInsnMutator(final MethodInfo methodInfo, final MethodMutationContext context, final MethodVisitor delegateMethodVisitor, final IMutationOperatorInsn mutationOperator) {
         super(delegateMethodVisitor);
-        this.methodInfo = methodInfo;
+        MethodInfo methodInfo1 = methodInfo;
         this.context = context;
         this.mutationOperator = mutationOperator;
     }
@@ -60,7 +59,8 @@ public abstract class AbstractInsnMutator extends MutatingMethodAdapter {
             if (this.context.shouldMutate(newId)) {
                 // Only one mutation in the "node"
                 if (hasMutated) {
-                    throw new RuntimeException("Multiple mutation in the same opcode: " + opcode);
+                    //throw new RuntimeException("Multiple mutation in the same opcode: " + opcode);
+                    continue;
                 } else {                    
                     mutation.apply(this.mv);
                     hasMutated = true;

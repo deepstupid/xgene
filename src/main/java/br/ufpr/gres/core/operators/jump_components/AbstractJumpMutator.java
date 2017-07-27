@@ -31,12 +31,11 @@ import org.objectweb.asm.MethodVisitor;
 public class AbstractJumpMutator extends MutatingMethodAdapter {
 
     private final MethodMutationContext context;
-    private final MethodInfo methodInfo;
     private final IMutationOperatorJump mutationOperator;
 
     public AbstractJumpMutator(final MethodInfo methodInfo, final MethodMutationContext context, final MethodVisitor delegateMethodVisitor, final IMutationOperatorJump mutationOperator) {
         super(delegateMethodVisitor);
-        this.methodInfo = methodInfo;
+        MethodInfo methodInfo1 = methodInfo;
         this.context = context;
         this.mutationOperator = mutationOperator;
     }

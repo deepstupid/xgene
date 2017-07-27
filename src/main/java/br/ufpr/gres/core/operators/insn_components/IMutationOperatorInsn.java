@@ -25,7 +25,7 @@ import java.util.List;
  */
 public interface IMutationOperatorInsn extends IMutationOperator {
 
-    public boolean shouldMutate(int opcode);
+    boolean shouldMutate(int opcode);
 
-    public List<IInsnSubstitution> getMutation(int opcode);
+    List<IInsnSubstitution> getMutation(int opcode);
 }

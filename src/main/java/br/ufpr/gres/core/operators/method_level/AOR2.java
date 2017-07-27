@@ -24,10 +24,8 @@ import br.ufpr.gres.core.operators.insn_components.IMutationOperatorInsn;
 import br.ufpr.gres.core.operators.insn_components.InsnVisitor;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -45,7 +43,7 @@ public enum AOR2 implements IMutationOperatorInsn {
 
     private final String description;
 
-    private AOR2(String description) {
+    AOR2(String description) {
         this.description = description;
     }
 
@@ -73,37 +71,29 @@ public enum AOR2 implements IMutationOperatorInsn {
      * Populate OPCODE_TO_MUTATION_MAP.
      */
     static {
-        opcodesInt.addAll(Arrays.asList(new Integer[]{
-            Opcodes.IADD,
-            Opcodes.ISUB,
-            Opcodes.IMUL,
-            Opcodes.IDIV,
-            Opcodes.IREM
-        }));
+        opcodesInt.addAll(Arrays.asList(Opcodes.IADD,
+                Opcodes.ISUB,
+                Opcodes.IMUL,
+                Opcodes.IDIV,
+                Opcodes.IREM));
 
-        opcodesLong.addAll(Arrays.asList(new Integer[]{
-            Opcodes.LADD,
-            Opcodes.LSUB,
-            Opcodes.LMUL,
-            Opcodes.LDIV,
-            Opcodes.LREM
-        }));
+        opcodesLong.addAll(Arrays.asList(Opcodes.LADD,
+                Opcodes.LSUB,
+                Opcodes.LMUL,
+                Opcodes.LDIV,
+                Opcodes.LREM));
 
-        opcodesFloat.addAll(Arrays.asList(new Integer[]{
-            Opcodes.FADD,
-            Opcodes.FSUB,
-            Opcodes.FMUL,
-            Opcodes.FDIV,
-            Opcodes.FREM
-        }));
+        opcodesFloat.addAll(Arrays.asList(Opcodes.FADD,
+                Opcodes.FSUB,
+                Opcodes.FMUL,
+                Opcodes.FDIV,
+                Opcodes.FREM));
 
-        opcodesDouble.addAll(Arrays.asList(new Integer[]{
-            Opcodes.DADD,
-            Opcodes.DSUB,
-            Opcodes.DMUL,
-            Opcodes.DDIV,
-            Opcodes.DREM
-        }));       
+        opcodesDouble.addAll(Arrays.asList(Opcodes.DADD,
+                Opcodes.DSUB,
+                Opcodes.DMUL,
+                Opcodes.DDIV,
+                Opcodes.DREM));
     }
 
     private Set<Integer> getMutations(int opcode) {

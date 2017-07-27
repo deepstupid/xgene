@@ -40,16 +40,16 @@ import org.slf4j.LoggerFactory;
 public class TestCase {
 
     private static final Logger logger = LoggerFactory.getLogger(TestCase.class);
-    private ClassDetails testClass;
+    private final ClassDetails testClass;
     private Class clazzInstance;
 
     private ArrayList<Method> testCasesMethods;
-    private ArrayList<String> testCasesNames;
+    private final ArrayList<String> testCasesNames;
 
     /**
      * Test results
      */
-    private Map<String, TestResultType> testResults = new TreeMap<>(new AlphanumComparator());
+    private final Map<String, TestResultType> testResults = new TreeMap<>(new AlphanumComparator());
 
     public TestCase(ClassDetails testClass) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         this.testClass = testClass;
@@ -86,15 +86,13 @@ public class TestCase {
             }
 
             // Read the test case names
-            testCasesMethods.stream().forEach((currentTestCase) -> {
+            testCasesMethods.forEach((currentTestCase) -> {
                 // Define all how PASS, after is updated in runTest method                            
                 testResults.put(currentTestCase.getName(), TestResultType.PASS);
                 testCasesNames.add(currentTestCase.getName());
             });
 
-            Collections.sort(this.testCasesNames, new AlphanumComparator());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            logger.error("Error for read the test class " + testClass.getClassName().toString(), ex);
+            this.testCasesNames.sort(new AlphanumComparator());
         } catch (Exception ex) {
             logger.error("Error for read the test class " + testClass.getClassName().toString(), ex);
         }

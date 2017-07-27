@@ -45,11 +45,9 @@ public class RandomStrategy extends AbstractStrategy {
             MutationDetails mutationDetails = null;
 
             if (itemsAvailable.isEmpty()) {
-                itemsAvailable = new ArrayList(this.originalList);                
-                
-                for (MutationDetails r : result) {
-                    itemsAvailable.remove(r);
-                }
+                itemsAvailable = new ArrayList(this.originalList);
+
+                itemsAvailable.removeAll(result);
             }
 
             mutationDetails = itemsAvailable.get(randomGenerator.nextInt(0, itemsAvailable.size() - 1));
@@ -60,7 +58,7 @@ public class RandomStrategy extends AbstractStrategy {
         }
 
         updateListStrategy(result);
-        Collections.sort(result, getComparator());
+        result.sort(getComparator());
 
         return result;
     }

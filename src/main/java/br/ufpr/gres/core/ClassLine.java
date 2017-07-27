@@ -73,10 +73,7 @@ public final class ClassLine {
         } else if (!this.clazz.equals(other.clazz)) {
             return false;
         }
-        if (this.lineNumber != other.lineNumber) {
-            return false;
-        }
-        return true;
+        return this.lineNumber == other.lineNumber;
     }
 
     @Override
